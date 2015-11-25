@@ -14,6 +14,10 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
+import javax.swing.JScrollPane;
+import javax.swing.SwingConstants;
+import javax.swing.JTextArea;
+import javax.swing.ScrollPaneConstants;
 
 
 public class ExampleWindow extends JFrame implements ActionListener {
@@ -27,8 +31,17 @@ public class ExampleWindow extends JFrame implements ActionListener {
 	private JLabel _ageLabel;
 	private JTextField _ageTextField;
 	private JComboBox _todoComboBox;
+	private JScrollPane _todoScrollPane;
 	
 	private Border _redBorder, _blackBorder;
+	private JLabel lblMyToDo;
+	private JTextField textField;
+	private JTextField textField_1;
+	private JTextField textField_2;
+	private JTextField textField_3;
+	private JTextField textField_4;
+	private JTextField textField_5;
+	private JTextField textField_6;
 	
 	
 	//private NameTextFieldHandler _nameTextFieldHandler;
@@ -63,7 +76,7 @@ public class ExampleWindow extends JFrame implements ActionListener {
 	// PRIVATE METHODS +++++++++++++++++++++++++++++++++++++++++++
 	private void _initialize() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 302, 303);
+		setBounds(100, 100, 400, 400);
 		this._contentPane = new JPanel();
 		this._contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(this._contentPane);
@@ -76,7 +89,7 @@ public class ExampleWindow extends JFrame implements ActionListener {
 	}
 	
 	private void _addLabel() {
-		this._Label.setBounds(5, 6, 225, 23);
+		this._Label.setBounds(5, 10, 300, 30);
 		this._contentPane.add(this._Label);
 	}
 
@@ -90,34 +103,92 @@ public class ExampleWindow extends JFrame implements ActionListener {
 		
 		// Name Label
 		this._nameLabel = new JLabel("Enter Name:");
-		this._nameLabel.setBounds(5, 41, 96, 23);
+		this._nameLabel.setBounds(5, 45, 100, 30);
 		this._contentPane.add(_nameLabel);
 		
 		// Name Text Field
 		this._nameTextField = new JTextField();
-		this._nameTextField.setBounds(99, 35, 131, 29);
+		this._nameTextField.setBounds(110, 45, 200, 30);
 		this._nameTextField.setText("");
 		this._nameTextField.setBorder(this._blackBorder);
 		this._contentPane.add(this._nameTextField);
 		
+		// Enter button
 		this._enterBtn = new JButton("Click Me!");
-		this._enterBtn.setBounds(115, 223, 117, 29);
+		this._enterBtn.setBounds(5, 300, 100, 30);
 		this._contentPane.add(this._enterBtn);
 		
+		// Age label
 		this._ageLabel = new JLabel("Enter Age:");
-		this._ageLabel.setBounds(5, 82, 76, 16);
+		this._ageLabel.setBounds(5, 80, 100, 30);
 		this._contentPane.add(this._ageLabel);
 		
+		// Age text field
 		this._ageTextField = new JTextField();
-		this._ageTextField.setBounds(99, 76, 131, 28);
+		this._ageTextField.setBounds(110, 80, 200, 30);
 		this._ageTextField.setBorder(this._blackBorder);
 		this._contentPane.add(this._ageTextField);
 		
+		// Combo box
 		this._todoComboBox = new JComboBox();
 		this._todoComboBox.setModel(new DefaultComboBoxModel(new String[] {"1", "2", "3", "4", "5"}));
 		this._todoComboBox.setSelectedIndex(0);
-		this._todoComboBox.setBounds(178, 116, 64, 38);
+		this._todoComboBox.setBounds(5, 130, 70, 30);
 		this._contentPane.add(this._todoComboBox);
+		
+		// ScrollPane
+		this._todoScrollPane = new JScrollPane();
+		_todoScrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+		_todoScrollPane.setAutoscrolls(true);
+		this._todoScrollPane.setBounds(110, 120, 250, 210);
+		this._contentPane.add(this._todoScrollPane);
+		
+		lblMyToDo = new JLabel("My to do List:");
+		lblMyToDo.setHorizontalAlignment(SwingConstants.CENTER);
+		_todoScrollPane.setColumnHeaderView(lblMyToDo);
+		
+		JPanel panel = new JPanel();
+		_todoScrollPane.setViewportView(panel);
+		panel.setLayout(null);
+		
+		JTextArea textArea = new JTextArea();
+		textArea.setBounds(122, 5, 4, 22);
+		panel.add(textArea);
+		
+		textField = new JTextField();
+		textField.setBounds(50, 10, 146, 25);
+		panel.add(textField);
+		textField.setColumns(10);
+		
+		textField_1 = new JTextField();
+		textField_1.setBounds(50, 40, 146, 25);
+		panel.add(textField_1);
+		textField_1.setColumns(10);
+		
+		textField_2 = new JTextField();
+		textField_2.setBounds(50, 70, 146, 25);
+		panel.add(textField_2);
+		textField_2.setColumns(10);
+		
+		textField_3 = new JTextField();
+		textField_3.setBounds(50, 100, 146, 25);
+		panel.add(textField_3);
+		textField_3.setColumns(10);
+		
+		textField_4 = new JTextField();
+		textField_4.setBounds(50, 130, 146, 25);
+		panel.add(textField_4);
+		textField_4.setColumns(10);
+		
+		textField_5 = new JTextField();
+		textField_5.setBounds(50, 160, 146, 25);
+		panel.add(textField_5);
+		textField_5.setColumns(10);
+		
+		textField_6 = new JTextField();
+		textField_6.setBounds(50, 190, 146, 25);
+		panel.add(textField_6);
+		textField_6.setColumns(10);
 		
 	}
 
@@ -154,7 +225,7 @@ public class ExampleWindow extends JFrame implements ActionListener {
 			ArrayList<JTextField> textFieldArrayList = new ArrayList<JTextField>();
 			for(int index = 0; index <= this._todoComboBox.getSelectedIndex(); index++) {
 				textFieldArrayList.add(new JTextField());
-				textFieldArrayList.get(index).setBounds(99, 76 + (index*30), 131, 28);
+				textFieldArrayList.get(index).setBounds(110, 80 + (index*40), 200, 30);
 				this._contentPane.add(textFieldArrayList.get(index));
 				
 			}
